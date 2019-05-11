@@ -16,7 +16,7 @@ export class BooksService {
     return this.books;
   }
 
-  async getById(id: number): Promise<object> {
+  async getById(id: string): Promise<object> {
     const searchableId = Number(id);
     const foundItem = this.books.find(i => i.id === searchableId);
     if (!foundItem) {
@@ -26,7 +26,7 @@ export class BooksService {
     return foundItem;
   }
 
-  async deleteById(bookID: number): Promise<object> {
+  async deleteById(bookID: string): Promise<object> {
     const id = Number(bookID);
     const index = this.books.findIndex(book => book.id === id);
     if (index === -1) {
