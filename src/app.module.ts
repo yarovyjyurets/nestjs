@@ -6,8 +6,10 @@ import { logger } from './middlewares/logger';
 import { LoggerMiddlewareForBooks } from './middlewares/books';
 import { BooksController } from './books/books.controller';
 
+import { AuthModule } from './auth/auth.module';
+
 @Module({
-  imports: [BooksModule],
+  imports: [BooksModule, AuthModule],
   controllers: [AppController],
   providers: [AppService],
 })

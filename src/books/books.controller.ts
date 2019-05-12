@@ -9,10 +9,13 @@ import {
   HttpStatus,
   HttpException,
   UseFilters,
+  UseGuards,
 } from '@nestjs/common';
 import { BooksService } from './books.service';
 import { CreateBookDto, Params } from './dto';
 import { HttpExceptionFilter, AllExceptionsFilter } from '../middlewares/books.filter';
+
+import { AuthGuard } from '@nestjs/passport';
 
 // @UseFilters(new HttpExceptionFilter())
 @UseFilters(new AllExceptionsFilter(), new HttpExceptionFilter())
@@ -33,6 +36,7 @@ export class BooksController {
 
   @HttpCode(202)
   @Get(':id')
+  @UseGuards(AuthGuard('bearer'))
   async getBook(@Param('id') bookId: string) {
     const book = await this.booksService.getById(bookId);
     return book;

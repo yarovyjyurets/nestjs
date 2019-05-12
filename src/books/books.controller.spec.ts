@@ -10,11 +10,9 @@ describe('Books Controller', () => {
     }).compile();
     
     controller = module.get<BooksController>(BooksController);
-    console.log('>>>>>controller@!$@#')
   });
   
   it('should be defined', () => {
-    console.log('>>>>>controller', controller)
     expect(controller).toBeDefined();
   });
 });
