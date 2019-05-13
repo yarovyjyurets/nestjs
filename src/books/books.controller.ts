@@ -12,7 +12,7 @@ import {
   UseGuards,
 } from '@nestjs/common';
 import { BooksService } from './books.service';
-import { CreateBookDto, Params } from './dto';
+import { CreateBookDto, Params } from './dto/dto.book';
 import { HttpExceptionFilter, AllExceptionsFilter } from '../middlewares/books.filter';
 
 import { AuthGuard } from '@nestjs/passport';

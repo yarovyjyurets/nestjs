@@ -1,12 +1,6 @@
 import { Injectable, HttpException } from '@nestjs/common';
 import { BOOKS } from './mocks/books'
-
-interface Book {
-  id: number,
-  title: string,
-  description: string,
-  author: string,
-}
+import { Book } from './interfaces/book'
 
 @Injectable()
 export class BooksService {
