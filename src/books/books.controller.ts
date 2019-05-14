@@ -10,27 +10,30 @@ import {
   HttpException,
   UseFilters,
   UseGuards,
+  UsePipes,
 } from '@nestjs/common';
 import { BooksService } from './books.service';
 import { CreateBookDto, Params } from './dto/dto.book';
 import { HttpExceptionFilter, AllExceptionsFilter } from '../middlewares/books.filter';
 
 import { AuthGuard } from '@nestjs/passport';
+import { ValidationPipe } from './pipes/books.pipe';
+import { bookSchema } from './pipes/book.schema';
 
 // @UseFilters(new HttpExceptionFilter())
-@UseFilters(new AllExceptionsFilter(), new HttpExceptionFilter())
+@UseFilters(AllExceptionsFilter, HttpExceptionFilter)
 @Controller('books')
 export class BooksController {
   constructor(private readonly booksService: BooksService) { }
 
   @Get()
   getAllBooks(): Promise<any[]> {
-    throw new HttpException({
-      status: HttpStatus.FORBIDDEN,
-      error: 'This is a custom message',
-      info: 'asdasd',
-    }, HttpStatus.BAD_REQUEST)
     // throw new Error('asdasad');
+    // throw new HttpException({
+    //   status: HttpStatus.FORBIDDEN,
+    //   error: 'This is a custom message',
+    //   info: 'asdasd',
+    // }, HttpStatus.BAD_REQUEST)
     return this.booksService.getAll();
   }
 
@@ -50,6 +53,7 @@ export class BooksController {
   }
 
   @Post()
+  @UsePipes(new ValidationPipe(bookSchema))
   addBook(@Body() book: CreateBookDto): Promise<object> {
     return this.booksService.addBook(book);
   }
