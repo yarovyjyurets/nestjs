@@ -1,14 +1,16 @@
 import { Injectable } from '@nestjs/common';
-// import { UsersService } from '../users/users.service';
+import { JwtPayload } from './interfaces/jwt-payload';
+import { JwtService } from '@nestjs/jwt';
 
 @Injectable()
 export class AuthService {
-  // constructor(private readonly usersService: UsersService) { }
+  constructor(
+    // private readonly usersService: UsersService,
+    private readonly jwtService: JwtService,
+  ) { }
 
-  async validateUser(token: string): Promise<any> {
-    console.log('>>>>>sadasd')
-    // Validate if token passed along with HTTP request
-    // is associated with any registered account in the database
-    return {} //await this.usersService.findOneByToken(token);
+  async login(userCredentions: JwtPayload): Promise<string> {
+    console.log('>>>>>userCredentions', userCredentions)
+    return this.jwtService.sign(userCredentions);
   }
 }

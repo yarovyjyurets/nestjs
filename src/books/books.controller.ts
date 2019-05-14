@@ -13,16 +13,20 @@ import {
   UsePipes,
 } from '@nestjs/common';
 import { BooksService } from './books.service';
-import { CreateBookDto, Params } from './dto/dto.book';
+import { CreateBookDto } from './dto/dto.book';
 import { HttpExceptionFilter, AllExceptionsFilter } from '../middlewares/books.filter';
 
 import { AuthGuard } from '@nestjs/passport';
 import { ValidationPipe } from './pipes/books.pipe';
 import { bookSchema } from './pipes/book.schema';
+import { ApiBearerAuth, ApiUseTags } from '@nestjs/swagger';
 
-// @UseFilters(new HttpExceptionFilter())
-@UseFilters(AllExceptionsFilter, HttpExceptionFilter)
+@ApiBearerAuth()
+@ApiUseTags('boooks')
+
 @Controller('books')
+@UseFilters(AllExceptionsFilter, HttpExceptionFilter)
+@UseGuards(AuthGuard('jwt'))
 export class BooksController {
   constructor(private readonly booksService: BooksService) { }
 
@@ -37,9 +41,7 @@ export class BooksController {
     return this.booksService.getAll();
   }
 
-  @HttpCode(202)
   @Get(':id')
-  @UseGuards(AuthGuard('bearer'))
   async getBook(@Param('id') bookId: string) {
     const book = await this.booksService.getById(bookId);
     return book;

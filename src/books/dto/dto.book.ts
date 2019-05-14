@@ -13,8 +13,3 @@ export class CreateBookDto {
   @ApiModelProperty()
   readonly author: string;
 }
-
-export class Params {
-  @ApiModelProperty()
-  readonly id: string;
-}
