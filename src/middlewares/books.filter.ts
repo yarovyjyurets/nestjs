@@ -4,10 +4,10 @@ import { Request, Response } from 'express';
 @Catch(HttpException)
 export class HttpExceptionFilter implements ExceptionFilter {
   catch(exception: HttpException, host: ArgumentsHost) {
-    console.log('>>>>>HTTPEXCEPTION')
+    console.log('>>>>>HTTPEXCEPTION');
     const ctx = host.switchToHttp();
     const response = ctx.getResponse<Response>();
-    console.dir(exception.getResponse(), { colors: true, depth: 10 })
+    console.dir(exception.getResponse(), { colors: true, depth: 10 });
     const request = ctx.getRequest<Request>();
     const status = exception.getStatus();
     const json = exception.getResponse();
@@ -25,10 +25,10 @@ export class HttpExceptionFilter implements ExceptionFilter {
 @Catch()
 export class AllExceptionsFilter implements ExceptionFilter {
   catch(exception: Error, host: ArgumentsHost) {
-    console.dir('GLOBAL ERROR', { colors: true, depth: 10 })
+    console.dir('GLOBAL ERROR', { colors: true, depth: 10 });
     const ctx = host.switchToHttp();
     const response = ctx.getResponse();
-    console.dir(exception.message, { colors: true, depth: 10 })
+    console.dir(exception.message, { colors: true, depth: 10 });
     const request = ctx.getRequest();
 
     const status = exception instanceof HttpException

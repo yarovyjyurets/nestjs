@@ -6,10 +6,10 @@ import { ApiUseTags } from '@nestjs/swagger';
 @ApiUseTags('auth')
 @Controller('auth')
 export class AuthController {
-  constructor(private readonly authService: AuthService) {}
-  
+  constructor(private readonly authService: AuthService) { }
+
   @Post('login')
-  async createToken(@Body() userLogin : UserLogin): Promise<any> {
+  async createToken(@Body() userLogin: UserLogin): Promise<any> {
     return this.authService.login(userLogin);
   }
 }

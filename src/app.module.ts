@@ -6,7 +6,6 @@ import { logger } from './middlewares/logger';
 import { AuthModule } from './auth/auth.module';
 import { UsersModule } from './users/users.module';
 
-
 @Module({
   imports: [BooksModule, AuthModule, UsersModule],
   controllers: [AppController],
@@ -16,7 +15,7 @@ export class AppModule implements NestModule {
   configure(consumer: MiddlewareConsumer) {
     consumer
       .apply(logger)
-      .forRoutes('*')
+      .forRoutes('*');
       // .apply(LoggerMiddlewareForBooks)
       // .forRoutes(BooksController);
   }

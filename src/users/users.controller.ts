@@ -9,7 +9,7 @@ export class UsersController {
   @Get('')
   @UseGuards(AuthGuard('jwt'))
   findAll() {
-    return 'Year u got protected route'
+    return 'Year u got protected route';
     // this route is restricted by AuthGuard
     // JWT strategy
   }

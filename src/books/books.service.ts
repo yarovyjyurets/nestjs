@@ -1,10 +1,10 @@
 import { Injectable, HttpException } from '@nestjs/common';
-import { BOOKS } from './mocks/books'
-import { Book } from './interfaces/book'
+import { BOOKS } from './mocks/books';
+import { Book } from './interfaces/book';
 
 @Injectable()
 export class BooksService {
-  books = BOOKS;
+  books: Book[] = BOOKS;
 
   async getAll(): Promise<any> {
     return this.books;
@@ -28,17 +28,16 @@ export class BooksService {
     }
     const [deletedBook] = this.books.splice(index, 1);
 
-
     return deletedBook;
   }
 
-  async addBook(book: Book): Promise<Book> {
-    const bookId = Number(book.id);
-    const index = this.books.findIndex(book => book.id === bookId);
+  async addBook(newNook: Book): Promise<Book> {
+    const bookId = Number(newNook.id);
+    const index = this.books.findIndex(storedook => storedook.id === bookId);
     if (index === -1) {
-      this.books.push(book);
+      this.books.push(newNook);
 
-      return book;
+      return newNook;
     }
 
     throw new HttpException('Book already exists!', 409);

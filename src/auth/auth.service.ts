@@ -10,7 +10,7 @@ export class AuthService {
   ) { }
 
   async login(userCredentions: JwtPayload): Promise<string> {
-    console.log('>>>>>userCredentions', userCredentions)
+    console.log('>>>>>userCredentions', userCredentions);
     return this.jwtService.sign(userCredentions);
   }
 }

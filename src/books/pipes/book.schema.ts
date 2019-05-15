@@ -5,4 +5,4 @@ export const bookSchema = {
   title: joi.string(),
   description: joi.string(),
   author: joi.string(),
-}
+};

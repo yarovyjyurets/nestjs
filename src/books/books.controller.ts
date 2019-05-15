@@ -48,7 +48,6 @@ export class BooksController {
     // res.status(200).send(book);
   }
 
-
   @Delete(':id')
   deleteBook(@Param('id') bookId: string): Promise<object> {
     return this.booksService.deleteById(bookId);

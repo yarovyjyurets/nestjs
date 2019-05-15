@@ -5,7 +5,7 @@ import { LoggerMiddlewareForBooks } from '../middlewares/books';
 
 @Module({
   controllers: [BooksController],
-  providers: [BooksService]
+  providers: [BooksService],
 })
 export class BooksModule implements NestModule {
   configure(consumer: MiddlewareConsumer) {
